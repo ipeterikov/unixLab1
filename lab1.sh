@@ -51,11 +51,12 @@ case "$source_file" in
 	  echo "Unsupported file type! "
 	  exit 3
 esac
-cd "$directory"
-mv "$temp_dir/$output_name" "./$output_name"
-rm -rf "$temp_dir"
 if [ $? -ne 0 ]; then
   echo "do not compiling"
   exit 1
-else echo "Build successful: &Output: $output_name"
+else 
+cd "$directory"
+mv "$temp_dir/$output_name" "./$output_name"
+echo "Build successful: &Output: $output_name"
 fi
+rm -rf "$temp_dir"
