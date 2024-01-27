@@ -37,6 +37,9 @@ if [ -z "$output_name" ]; then
 fi
 
 # Compile the source file, place output in the tempdir.
+cp "$source_file" "$temp_dir"/
+directory=$(pwd)
+cd "$temp_dir"
 case "$source_file" in
 	*.c)
 	  gcc "$source_file" -o "$temp_dir/$output_name"
@@ -48,6 +51,11 @@ case "$source_file" in
 	  echo "Unsupported file type! "
 	  exit 3
 esac
+cd "$directory"
 mv "$temp_dir/$output_name" "./$output_name"
 rm -rf "$temp_dir"
-echo "Build successful: &Output: $output_name"
+if [ $? -ne 0 ]; then
+  echo "do not compiling"
+  exit 1
+else echo "Build successful: &Output: $output_name"
+fi
