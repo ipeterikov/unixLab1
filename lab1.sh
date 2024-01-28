@@ -51,8 +51,8 @@ case "$source_file" in
 	  echo "Unsupported file type! "
 	  exit 3
 esac
-if [ $? -ne 0 ]; then
-  echo "do not compiling"
+if [ ! -f "$output_name" ]; then
+  echo "build not successful"
   exit 1
 else 
 cd "$directory"
